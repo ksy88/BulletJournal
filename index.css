@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap&subset=korean');
+
+html{
+	font-family: 'Nanum Myeongjo', serif;
+	font-weight: bold;
+}
+#title {
+	background-color: white;
+	color:black;
+	text-align: center;
+}
+
+body {
+	
+}
+
+#main_menu {
+	padding-left: 300px;
+	padding-right: 300px;
+}
+
+nav {
+	text-align: center;
+}
+
+a {
+	text-decoration: none;
+	background-color:white;
+	color:black;
+	margin-right:20px;
+	margin-left: 20px;
+}
+
+h2 {
+	text-align: center;
+}
+
+
+#week0 {
+	background-color:#e64c4c;
+}
+
+#week1 {
+	background-color:#e6824c;
+}
+
+#week2 {
+	background-color:#f1e943;
+}
+
+#week3 {
+	background-color:#71cb17;
+}
+
+#week4 {
+	background-color:#327beb;
+}
+
+#week5 {
+	background-color:#a244fa;
+}
+
+#week6 {
+	background-color:#d944fa;
+}
+
+#day_plan {
+	width:470px;
+	height:500px;
+	margin-left: auto;
+	margin-right: auto;
+	padding:20px;
+	border:1px solid black;
+}
+
+#create_button {
+	text-align: center;
+}
+
+#create_todo {
+	font-size:45px;
+	color: white;
+	background-color: skyblue;
+
+	display: inline-block;
+	margin: 5px;
+
+	width:50px;
+	height:50px;
+	line-height: 50px;
+	border:3px solid darkblue;
+	border-radius: 50%;
+	
+	
+}
+
+#todo_title {
+	width:450px;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+#description {
+	width:450px;
+	height:200px;
+	margin-top:10px;
+	margin-bottom: 25px;
+	resize: none;
+}
+
+#add_todo_button {
+	text-align: right;
+}
+
+.day_box {
+	border-width:3px;
+	border-style: solid;
+	width:100px;
+	height: 100px;
+	vertical-align: top;
+}
+
+.todo_time {
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+table {
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+}
+
