@@ -1,36 +1,65 @@
 <?php 
-$nav_array= array('home', 'monthly', 'weekly', 'daily');
-$nav_list='';
-$i=0;
-while($i<count($nav_array)) {
-	if($nav_array[$i]!='home'){
-		$nav_list=$nav_list."<a href=\"{$nav_array[$i]}.php\">{$nav_array[$i]}</a>";
-		$i=$i+1;
-	}
-	else {
-		$nav_list=$nav_list."<a href=\"index.php\">{$nav_array[$i]}</a>";
-		$i=$i+1;
-	}
-}
+include("nav.php");
+
 //---------------------------------------------------------------
 
 date_default_timezone_set("Asia/Seoul");
 $year=date('Y');
 $full_day=date('Y-m-d');
 
-if (isset($_GET['month']) && isset($_GET['day'])) {
-	$full_day=date("{$year}-{$_GET['month']}-{$_GET['day']}");
+if (isset($_GET['year'])&&isset($_GET['month']) && isset($_GET['day'])) {
+	$full_day=date("{$_GET['year']}-{$_GET['month']}-{$_GET['day']}");
 }
 //------------------------------------------------------------------
 $month=date('m');
 $day=date('d');
 
-if (isset($_GET['month']) && isset($_GET['day'])) {
-	$plus_button="<a id='create_todo' href=\"create_todo_page.php?month={$_GET['month']}&day={$_GET['day']}\">+</a>";
+if (isset($_GET['year'])&&isset($_GET['month']) && isset($_GET['day'])) {
+	$year=$_GET['year'];
+	$month=$_GET['month'];
+	$day=$_GET['day'];
+	$plus_button="<a id='create_todo' href=\"create_todo_page.php?year={$_GET['year']}&month={$_GET['month']}&day={$_GET['day']}\">+</a>";
 }
 else {
-	$plus_button="<a id='create_todo' href=\"create_todo_page.php?month={$month}&day={$day}\">+</a>";
+	$year=date('Y');
+	$month=date('m');
+	$day=date('d');
+	$plus_button="<a id='create_todo' href=\"create_todo_page.php?year={$year}&month={$month}&day={$day}\">+</a>";
 }
+
+//------------------------------------------------------------------
+$conn=mysqli_connect('127.0.0.1', 'BulletJournal', '111111', 'journal');
+
+$filtered=array(
+	'year' => mysqli_real_escape_string($conn, $year),
+	'month' => mysqli_real_escape_string($conn, $month),
+	'day' => mysqli_real_escape_string($conn, $day)
+);
+
+$filtered_date=date("{$filtered['year']}-{$filtered['month']}-{$filtered['day']}");
+
+if(isset($user_id)) {
+	$sql="SELECT * FROM {$user_id} Where date=\"{$filtered_date}\"";
+}
+else{
+	$sql="SELECT * FROM todo_list Where date=\"{$filtered_date}\"";
+}
+
+
+
+$result=mysqli_query($conn, $sql);
+if($result===false) {
+	echo '에러가 생겼습니다.';
+}
+
+$list='';
+while($row=mysqli_fetch_array($result)) {
+	$list=$list."<li>{$row['title']}<br>Start: {$row['start']}--End: {$row['end']}<br>
+		Description: {$row['description']}</li><br>";
+}
+
+
+
 
 ?>
 
@@ -57,7 +86,7 @@ else {
 	</div>
 	
 	<div id='day_plan'>	
-		<p></p>	
+		<ol><?=$list?></ol>	
 	</div>
 </body>
 </html>

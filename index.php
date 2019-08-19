@@ -1,17 +1,6 @@
 <?php 
-$nav_array= array('home', 'monthly', 'weekly', 'daily');
-$nav_list='';
-$i=0;
-while($i<count($nav_array)) {
-	if($nav_array[$i]!='home'){
-		$nav_list=$nav_list."<a href=\"{$nav_array[$i]}.php\">{$nav_array[$i]}</a>";
-		$i=$i+1;
-	}
-	else {
-		$nav_list=$nav_list."<a href=\"index.php\">{$nav_array[$i]}</a>";
-		$i=$i+1;
-	}
-}
+include("nav.php");
+include("main_login.php");
 ?>
 
 <!DOCTYPE HTML>
@@ -26,12 +15,14 @@ while($i<count($nav_array)) {
 	background-image: url('index_img.jpg');
 	background-repeat:no-repeat;
 	background-size:cover;
+	height: 500px;
 	">
-	<header>
+	<header style="vertical-align: top;">
 		<h1 id='title'>Welcome to Your Bullet Journal!</h1>
 		<div id='main_menu'>
 			<nav><?=$nav_list?></nav>
 		</div>
 	</header>
+	<div id=login_info_wrap><div id=login_info><?=$print_login_info?></div></div>
 </body>
 </html>

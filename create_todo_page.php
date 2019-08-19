@@ -1,24 +1,12 @@
 <?php 
-$nav_array= array('home', 'monthly', 'weekly', 'daily');
-$nav_list='';
-$i=0;
-while($i<count($nav_array)) {
-	if($nav_array[$i]!='home'){
-		$nav_list=$nav_list."<a href=\"{$nav_array[$i]}.php\">{$nav_array[$i]}</a>";
-		$i=$i+1;
-	}
-	else {
-		$nav_list=$nav_list."<a href=\"index.php\">{$nav_array[$i]}</a>";
-		$i=$i+1;
-	}
-}
+include("nav.php");
 //---------------------------------------------------------------
 
 date_default_timezone_set("Asia/Seoul");
 $year=date('Y');
-$day=date('Y-m-d');
-if (isset($_GET['month']) && isset($_GET['day'])) {
-	$day=date("{$year}-{$_GET['month']}-{$_GET['day']}");
+$full_day=date('Y-m-d');
+if (isset($_GET['year'])&&isset($_GET['month']) && isset($_GET['day'])) {
+	$full_day=date("{$_GET['year']}-{$_GET['month']}-{$_GET['day']}");
 }
 
 
@@ -41,14 +29,14 @@ if (isset($_GET['month']) && isset($_GET['day'])) {
 		</div>
 	</header>
 
-	<h2><?=$day?></h2>
+	<h2><?=$full_day?></h2>
 	
 	<div id='create_button'>
 		<a id='create_todo' href="create_todo_page.php">+</a>
 	</div>
 	
 	<div id='day_plan'>	
-			<form>
+			<form action='process_todo.php' method="post">
 				Title of Todo : <br>
 					<input id='todo_title' type='text' name='todo_title' placeholder="What do you wanna do?"> <br>
 				Starts From : <br>
