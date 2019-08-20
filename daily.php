@@ -54,8 +54,19 @@ if($result===false) {
 
 $list='';
 while($row=mysqli_fetch_array($result)) {
-	$list=$list."<li>{$row['title']}<br>Start: {$row['start']}--End: {$row['end']}<br>
-		Description: {$row['description']}</li><br>";
+	$list=$list."<li>{$row['title']}<br>
+				Start: {$row['start']}--End: {$row['end']}<br>
+				Description: {$row['description']}</li>
+				<form action='rewrite.php' method='post'>
+				<input type='hidden' name='id' value=\"{$row['id']}\">
+				<input class='rewrite_button' type='submit' name='rewrite' value='rewrite'>
+				</form>
+				<form action='delete_process.php' method='post'>
+				<input type='hidden' name='id' value=\"{$row['id']}\">
+				<input type='hidden' name='date' value=\"{$row['date']}\">
+				<input class='delete_button' type='submit' name='delete' value='delete'>
+				</form>
+				<br>";
 }
 
 
@@ -69,6 +80,7 @@ while($row=mysqli_fetch_array($result)) {
 	<meta charset="utf-8">
 	<title>Daily Plan</title>
 	<link rel='stylesheet' href='index.css'>
+	<link rel='stylesheet' href='daily.css'>
 	<script type='text/JavaScript' src='index.js'></script>
 </head>
 <body>
